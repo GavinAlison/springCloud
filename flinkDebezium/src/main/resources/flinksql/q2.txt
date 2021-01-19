@@ -1,0 +1,4 @@
+insert into user_hbase3
+SELECT uid,
+ROW(sex, age, created_time ) as cf
+FROM  (select uid,sex,age, cast(created_time as VARCHAR) as created_time from `user`)

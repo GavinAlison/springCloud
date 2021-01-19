@@ -1,0 +1,10 @@
+spring:
+  kafka:
+    consumer:
+      group-id: demo
+      auto-offset-reset: latest
+      bootstrap-servers: 11.11.1.108:9092
+      client-id: consumer-1
+    producer:
+      bootstrap-servers: 11.11.1.108:9092
+      client-id: producer-1

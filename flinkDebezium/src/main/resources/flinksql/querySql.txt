@@ -1,0 +1,14 @@
+CREATE TABLE `user` (
+   uid BIGINT,
+    sex VARCHAR,
+    age INT,
+    created_time TIMESTAMP(3),
+    WATERMARK FOR created_time as created_time - INTERVAL '3' SECOND
+) WITH (
+    'connector' = 'kafka',
+    'topic' = 'user_long',
+    'scan.startup.mode' = 'latest-offset',
+    'properties.group.id' = 'user_flink',
+    'format' = 'json',
+    'format.derive-schema' = 'true'
+)

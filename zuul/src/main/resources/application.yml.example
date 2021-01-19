@@ -1,0 +1,22 @@
+### 案例一: 使用 SimpleHostRoutingFilter
+
+zuul:
+  host:
+    # 链接超时时间
+    connect-timeout-millis: 2000
+    # socket超时时间
+    socket-timeout-millis: 10000
+  # routes 即为 Map<String, ZuulRoute> routes = new LinkedHashMap<>()
+  routes:
+    # route名称 - 是ZuulRoute属性中的id，也是Map中的key
+    #matched=ZuulRoute{id='test', path='/test/**', serviceId='null', url='http://127.0.0.1:9008/t/test', stripPrefix=true, retryable=null, sensitiveHeaders=[Cookie, Set-Cookie, Authorization], customSensitiveHeaders=true, }
+    test:
+      # 匹配路径模板
+      path: /test/**
+      # 请求转发到的服务id 和 url属性互斥，两个只能配置一个
+      # 请求转发到的物理路径
+      url: http://127.0.0.1:9008/t/test
+      # 转发前是否跳过前缀,默认为true，前缀指的是：匹配路径的path前缀 or zuul.prefix定义
+      stripPrefix: true
+      # 敏感Header， 转发时会去掉敏感的头部信息，以下是默认的配置。
+      sensitiveHeaders: Cookie,Set-Cookie,Authorization

@@ -1,0 +1,12 @@
+CREATE TABLE user_hbase3(
+    rowkey BIGINT,
+    cf ROW(sex VARCHAR, age INT, created_time VARCHAR)
+) WITH (
+    'connector.type' = 'hbase',
+    'connector.version' = '2.1.0',
+    'connector.table-name' = 'user_hbase2',
+    'connector.zookeeper.znode.parent' = '/hbase',
+    'connector.write.buffer-flush.max-size' = '10mb',
+    'connector.write.buffer-flush.max-rows' = '1000',
+    'connector.write.buffer-flush.interval' = '2s'
+)
