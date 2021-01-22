@@ -116,4 +116,21 @@ systemctl disable firewalld
 # 13. 启动服务mysql
 /etc/init.d/mysql start
 
+# 14.系统自启动mysql
+yum install chkconfig -y
+# 将服务文件拷贝到init.d下，并重命名为mysql
+cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
+chmod +x /etc/init.d/mysql
+#添加服务
+chkconfig --add mysql
+# 显示服务列表
+chkconfig --list
+#如果看到mysql的服务，并且3,4,5都是on的话则成功，如果是off，则键入
+chkconfig --level 345 mysqld on
+reboot
+#验证
+netstat -na | grep 3306
+
+
+
 
