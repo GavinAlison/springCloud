@@ -36,6 +36,9 @@
         <module>mysql-doc</module>
         <module>flink-cdc</module>
         <module>micro-jmh-demo</module>
+        <module>mqstart</module>
+        <module>music</module>
+        <module>copy</module>
     </modules>
 
 

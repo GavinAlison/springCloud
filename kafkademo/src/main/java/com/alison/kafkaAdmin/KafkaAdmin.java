@@ -1,4 +1,4 @@
-package com.alison.kafka;
+package com.alison.kafkaAdmin;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.admin.*;
@@ -19,12 +19,12 @@ import java.util.concurrent.TimeUnit;
 import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
 @Slf4j
-public class KafkaDemo {
+public class KafkaAdmin {
 
     private static String BOOTSTRAP_SERVERS = "192.168.1.5:9092";
 
     public static void main(String[] args) throws Exception {
-        KafkaDemo kafkaDemo = new KafkaDemo();
+        KafkaAdmin kafkaDemo = new KafkaAdmin();
         kafkaDemo.send();
         kafkaDemo.consumer();
     }
@@ -87,27 +87,19 @@ public class KafkaDemo {
         properties.put(CLIENT_ID_CONFIG, "producer-syn-2"); // 发送端id,便于统计
         properties.put(KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
         properties.put(VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
-//        properties.put(TRANSACTIONAL_ID_CONFIG, "producer-1"); // 每台机器唯一
+        properties.put(TRANSACTIONAL_ID_CONFIG, "producer-1"); // 每台机器唯一
         properties.put(ENABLE_IDEMPOTENCE_CONFIG, true); // 设置幂等性
 
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
-//        kafkaProducer.initTransactions();
-//        kafkaProducer.beginTransaction();
+        kafkaProducer.initTransactions();
+        kafkaProducer.beginTransaction();
         String path = "D:\\jrxTmp\\spingcloud\\flinkDebezium\\src\\main\\resources\\message.txt";
-//        String path = "D:\\jrxTmp\\spingcloud\\flinkDebezium\\src\\main\\resources\\csv\\testA.csv";
         List<String> messages = Files.readAllLines(new File(path).toPath());
 
-//        messages.forEach(e -> {
-//            kafkaProducer.send(new ProducerRecord<String, String>("testA", e));
-//        });
-        int i = 0;
-        while (true) {
-            kafkaProducer.send(new ProducerRecord<String, String>("testA", messages.get(0)));
-            if (i++ > 1_000_000) {
-                break;
-            }
-        }
-//        kafkaProducer.commitTransaction();
+        messages.forEach(e -> {
+            kafkaProducer.send(new ProducerRecord<String, String>("streams-plaintext-input", e));
+        });
+        kafkaProducer.commitTransaction();
         TimeUnit.SECONDS.sleep(10);
     }
 
@@ -149,9 +141,8 @@ public class KafkaDemo {
         properties.put("request.timeout.ms", 5000);
         try (AdminClient client = AdminClient.create(properties)) {
             CreateTopicsResult result = client.createTopics(Arrays.asList(
-                    new NewTopic("topic1", 1, (short) 1),
-                    new NewTopic("topic2", 1, (short) 1),
-                    new NewTopic("topic3", 1, (short) 1)
+                    new NewTopic("streams-plaintext-input", 3, (short) 1),
+                    new NewTopic("streams-pipe-output", 1, (short) 1)
             ));
             try {
                 result.all().get();

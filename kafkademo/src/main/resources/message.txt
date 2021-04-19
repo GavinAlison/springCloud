@@ -1,0 +1,2 @@
+all stream into kafka
+kafka is real-time component
