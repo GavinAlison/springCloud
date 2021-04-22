@@ -57,7 +57,7 @@
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-walkthrough-common_2.11</artifactId>
-            <version>1.12-SNAPSHOT</version>
+            <version>1.11.2</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
