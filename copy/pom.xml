@@ -27,10 +27,8 @@
             <version>2.8.0</version>
         </dependency>
         <dependency>
-            <groupId>com.alison.javaBase</groupId>
-            <artifactId>JavaBase</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>test</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
