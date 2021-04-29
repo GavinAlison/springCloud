@@ -7,8 +7,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * link==>https://blog.csdn.net/luoweifu/article/details/46613015
  */
-public class SynchronizedTest {
-    g
+public class SynchronizedTest {g
     @Test
     public void test() throws Exception {
         SyncThread syncThread = new SyncThread();
