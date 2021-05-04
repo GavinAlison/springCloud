@@ -9,7 +9,7 @@ public class EventData {
 
     private String fileName;
 
-    private String fileContent;
+    private StringBuffer fileContent;
 
     private long offset;
 }
