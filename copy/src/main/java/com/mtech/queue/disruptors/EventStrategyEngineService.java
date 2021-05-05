@@ -7,11 +7,8 @@ import javax.annotation.PreDestroy;
 /**
  * 事件策略引擎服务
  *
- * @author yxy
- * @date 2019/1/16
  */
 @Slf4j
-//@EnableConfigurationProperties(EngineConfigProperties.class)
 public class EventStrategyEngineService {
 
     /**
@@ -22,7 +19,6 @@ public class EventStrategyEngineService {
     public void initialize() {
         EventDataSaveHandler[] handlers = new EventDataSaveHandler[30];
         for (int i = 0; i < 30; i++) {
-//            handlers[i] = new EventDataSaveHandler(iEventDataService, iStatDataLoader,compositeDataReceiver,engineConfigProperties);
             handlers[i] = new EventDataSaveHandler();
         }
         //事件数据队列
