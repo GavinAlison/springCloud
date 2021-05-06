@@ -13,3 +13,6 @@ CountDownLatch 就是一个计数器，内部保存一个数值，作用可以�
 内部使用Sync内部类进行处理计数器的原子操作
 Sync 继承 AbstractQueuedSynchronizer
 
+
+
+

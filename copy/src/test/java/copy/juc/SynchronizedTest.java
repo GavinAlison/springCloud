@@ -25,29 +25,35 @@ public class SynchronizedTest {
         thread2.start();
         TimeUnit.SECONDS.sleep(10);
     }
-}
 
-class SyncThread implements Runnable {
-    private static int count;
-
-    public SyncThread() {
-        count = 0;
+    @Test
+    public void test1() throws Exception {
+        Counter counter = new Counter();
+        Thread thread1 = new Thread(counter, "A");
+        Thread thread2 = new Thread(counter, "B");
+        thread1.start();
+        thread2.start();
+        TimeUnit.SECONDS.sleep(2);
     }
 
-    public void run() {
-        synchronized (this) {
-            for (int i = 0; i < 5; i++) {
-                try {
-                    System.out.println(Thread.currentThread().getName() + ":" + (count++));
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+    @Test
+    public void test2() throws Exception {
+        Account account = new Account("zhang san", 10000.0f);
+        AccountOperator accountOperator = new AccountOperator(account);
+
+        final int THREAD_NUM = 5;
+        Thread threads[] = new Thread[THREAD_NUM];
+        for (int i = 0; i < THREAD_NUM; i++) {
+            threads[i] = new Thread(accountOperator, "Thread" + i);
+            threads[i].start();
         }
+        TimeUnit.SECONDS.sleep(2);
     }
 
-    public int getCount() {
-        return count;
+    interface InnerClass {
+        void getXX();
     }
+
+
 }
+

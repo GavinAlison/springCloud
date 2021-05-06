@@ -39,5 +39,10 @@ int[] aa = new int[0];
 实例对象的class pointer指向的是类的class信息
 
 
+
+当前为32bit，在对象未被锁定情况下。25bit为存储对象的哈希码、4bit用于存储分代年龄，2bit用于存储锁标志位，1bit固定为0。
+
+
+
 > link: https://www.jianshu.com/p/6d62c3ee48d0
 >https://zhuanlan.zhihu.com/p/151856103

@@ -4,7 +4,7 @@
 
 底层，synchronized的流转过程，无锁--》偏向锁--》 轻量级锁--》重量锁
 
-这些锁的标识是通过mark word中是否偏向锁+锁标识字段进行控制的。
+这些锁的标识是通过mark word中是否偏向锁+锁标识字段进行控制的
 
 ## 为什么 wait 方法定义在 Object 类里面，而不是 Thread 类
 >https://blog.csdn.net/github_38592071/article/details/107438211
