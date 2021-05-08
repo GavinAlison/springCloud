@@ -39,6 +39,7 @@
         <module>mqstart</module>
         <module>music</module>
         <module>copy</module>
+        <module>learnAvaitor</module>
     </modules>
 
 
