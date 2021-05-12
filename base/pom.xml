@@ -117,7 +117,6 @@
                             <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
                             <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
                         </configuration>
-
                     </execution>
                 </executions>
             </plugin>
@@ -127,6 +126,13 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.aison.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>
