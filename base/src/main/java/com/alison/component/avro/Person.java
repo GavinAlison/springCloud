@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class Person extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 217129960461650490L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Person\",\"namespace\":\"com.alison.component.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"age\",\"type\":[\"int\",\"null\"]}]}");
+  private static final long serialVersionUID = 4030421797681348292L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Person\",\"namespace\":\"com.alison.component.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"age\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -73,7 +73,7 @@ public class Person extends org.apache.avro.specific.SpecificRecordBase implemen
 
    private java.lang.CharSequence id;
    private java.lang.CharSequence name;
-   private java.lang.Integer age;
+   private int age;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -155,7 +155,7 @@ public class Person extends org.apache.avro.specific.SpecificRecordBase implemen
    * Gets the value of the 'age' field.
    * @return The value of the 'age' field.
    */
-  public java.lang.Integer getAge() {
+  public int getAge() {
     return age;
   }
 
@@ -164,7 +164,7 @@ public class Person extends org.apache.avro.specific.SpecificRecordBase implemen
    * Sets the value of the 'age' field.
    * @param value the value to set.
    */
-  public void setAge(java.lang.Integer value) {
+  public void setAge(int value) {
     this.age = value;
   }
 
@@ -211,7 +211,7 @@ public class Person extends org.apache.avro.specific.SpecificRecordBase implemen
 
     private java.lang.CharSequence id;
     private java.lang.CharSequence name;
-    private java.lang.Integer age;
+    private int age;
 
     /** Creates a new Builder */
     private Builder() {
@@ -342,7 +342,7 @@ public class Person extends org.apache.avro.specific.SpecificRecordBase implemen
       * Gets the value of the 'age' field.
       * @return The value.
       */
-    public java.lang.Integer getAge() {
+    public int getAge() {
       return age;
     }
 
@@ -352,7 +352,7 @@ public class Person extends org.apache.avro.specific.SpecificRecordBase implemen
       * @param value The value of 'age'.
       * @return This builder.
       */
-    public com.alison.component.avro.Person.Builder setAge(java.lang.Integer value) {
+    public com.alison.component.avro.Person.Builder setAge(int value) {
       validate(fields()[2], value);
       this.age = value;
       fieldSetFlags()[2] = true;
@@ -373,7 +373,6 @@ public class Person extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.alison.component.avro.Person.Builder clearAge() {
-      age = null;
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -422,13 +421,7 @@ public class Person extends org.apache.avro.specific.SpecificRecordBase implemen
 
     out.writeString(this.name);
 
-    if (this.age == null) {
-      out.writeIndex(1);
-      out.writeNull();
-    } else {
-      out.writeIndex(0);
-      out.writeInt(this.age);
-    }
+    out.writeInt(this.age);
 
   }
 
@@ -441,12 +434,7 @@ public class Person extends org.apache.avro.specific.SpecificRecordBase implemen
 
       this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
 
-      if (in.readIndex() != 0) {
-        in.readNull();
-        this.age = null;
-      } else {
-        this.age = in.readInt();
-      }
+      this.age = in.readInt();
 
     } else {
       for (int i = 0; i < 3; i++) {
@@ -460,12 +448,7 @@ public class Person extends org.apache.avro.specific.SpecificRecordBase implemen
           break;
 
         case 2:
-          if (in.readIndex() != 0) {
-            in.readNull();
-            this.age = null;
-          } else {
-            this.age = in.readInt();
-          }
+          this.age = in.readInt();
           break;
 
         default:
